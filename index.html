@@ -15,25 +15,25 @@
         <p id="secondline"></p>
         <p id="thirdline"></p>
     </div>
-    <div id="clear" class="large-button">CE</div>
+    <div id="clear" class="large-button" onclick="clear()">CE</div>
     <div id="backspace" class="large-button"> <- </div>
-    <div id="equal" class="large-button"> = </div>
-    <div id="seven" class="small-button">7</div>
-    <div id="eight" class="small-button">8</div>
-    <div id="nine" class="small-button">9</div>
-    <div id="divide" class="small-button">/</div>
-    <div id="four" class="small-button">4</div>
-    <div id="five" class="small-button">5</div>
-    <div id="six" class="small-button">6</div>
-    <div id="multiply" class="small-button">*</div>
-    <div id="one" class="small-button">1</div>
-    <div id="two" class="small-button">2</div>
-    <div id="three" class="small-button">3</div>
-    <div id="plus" class="small-button">+</div>
+    <div id="=" class="large-button" onclick="calculate()"> = </div>
+    <div id="7" class="small-button" onclick="addNumber(this.id)">7</div>
+    <div id="8" class="small-button" onclick="addNumber(this.id)">8</div>
+    <div id="9" class="small-button" onclick="addNumber(this.id)">9</div>
+    <div id="/" class="small-button" onclick="addOperator(this.id)">/</div>
+    <div id="4" class="small-button" onclick="addNumber(this.id)">4</div>
+    <div id="5" class="small-button" onclick="addNumber(this.id)">5</div>
+    <div id="6" class="small-button" onclick="addNumber(this.id)">6</div>
+    <div id="*" class="small-button" onclick="addOperator(this.id)">*</div>
+    <div id="1" class="small-button" onclick="addNumber(this.id)">1</div>
+    <div id="2" class="small-button" onclick="addNumber(this.id)">2</div>
+    <div id="3" class="small-button" onclick="addNumber(this.id)">3</div>
+    <div id="+" class="small-button" onclick="addOperator(this.id)">+</div>
     <div id="negate" class="small-button">+/-</div>
-    <div id="zero" class="small-button">0</div>
+    <div id="0" class="small-button" onclick="addNumber(this.id)">0</div>
     <div id="float" class="small-button">.</div>
-    <div id="minus" class="small-button">-</div>
+    <div id="-" class="small-button" onclick="addOperator(this.id)">-</div>
     </div>
 </body>
 </html>

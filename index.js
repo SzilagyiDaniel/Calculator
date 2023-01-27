@@ -50,16 +50,6 @@ function addInput() {
    }
 
 function addOperator(id){
-//    if(operator !== "" && currentnumber !== ""){
-//        operator = id;
-//    }
-//    else if(totalnumber === "" && currentnumber !== ""){
-//        totalnumber = currentnumber;
-//        currentnumber = "";
-//        operator = id;
-//
-//        console.log(totalnumber, operator, currentnumber);
-//    }
 
     if (operator !== "" && currentnumber !== ""){
         calculate();

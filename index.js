@@ -1,56 +1,43 @@
-let total = "";
-let firstnumber = "";
-let secondnumber = "";
-let operator = "";
+let currentnumber = "";
+let totalnumber = "";
+let operator ="";
 
-function addNumber(id){
-    if(operator){
-        secondnumber = secondnumber + String(id);
-        console.log(firstnumber, secondnumber);
+document.addEventListener("DOMContentLoaded", ()=>{
+    let inputfields = document.getElementsByClassName("small-button");
+    let clearbutton = document.getElementById("clear");
+
+    for(let i = 0 ; i < inputfields.length; i++) {inputfields[i].addEventListener("click", addInput)};
+    clearbutton.addEventListener("click", clearAll);
+})
+
+function addInput() {
+    if(Number.isInteger(+this.id)){
+    currentnumber += this.id
+    console.log(currentnumber)
+   }
+    else if (this.id === "-"){
+    if (currentnumber === ""){
+        currentnumber += this.id;
     }
     else{
-        firstnumber = firstnumber + String(id);
-        console.log(firstnumber);
+        addOperator(this.id);
     }
-
+   }
 }
 
 function addOperator(id){
-    if(!secondnumber){
-        operator = String(id);
-        console.log(operator);
+    if(totalnumber === ""){
+        totalnumber = currentnumber;
+        currentnumber = "";
+        operator = id;
     }
-    else{
-        calculate();
-    }
+
+    console.log(currentnumber, id)
 }
 
-function calculate(){
-    console.log(firstnumber, operator, secondnumber);
-
-    switch(operator){
-        case "+":
-            console.log(+firstnumber + +secondnumber);
-            break;
-        case "-":
-            console.log(+firstnumber - +secondnumber);
-            break;
-        case "*":
-            console.log(+firstnumber * +secondnumber);
-            break;
-        case "/":
-            console.log(+firstnumber / +secondnumber);
-            break;
-    }
-
-    clear();
-}
-
-function clear(){
-    total = "";
-    firstnumber = "";
-    secondnumber = "";
-    operator = "";
+function clearAll(){
+    currentnumber = ""
+    totalnumber = ""
 
     console.log("cleared");
 }

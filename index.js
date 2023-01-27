@@ -21,7 +21,7 @@ function addInput() {
 
     if(Number.isInteger(+this.id)){
     currentnumber += this.id
-    console.log(totalnumber, operator, currentnumber)
+    writeFirstLine(currentnumber);
     }
     else if (this.id === "-" && currentnumber === "" && operator === "" && totalnumber === ""){
         currentnumber = this.id;
@@ -42,7 +42,7 @@ function addInput() {
             currentnumber = currentnumber.slice(1, currentnumber.length);
         }
 
-        console.log(currentnumber);
+        writeFirstLine(currentnumber);
     }
     else{
         addOperator(this.id);
@@ -58,11 +58,11 @@ function addOperator(id){
         totalnumber = currentnumber;
         currentnumber = "";
         operator = id;
-        console.log(totalnumber, operator, currentnumber)
+        writeFirstLine(totalnumber + operator);
     }
     else{
         operator = id;
-        console.log(totalnumber, operator, currentnumber)
+        writeFirstLine(totalnumber + operator);
     }
 
 }
@@ -76,26 +76,26 @@ function calculate(){
         case "+":
             totalnumber = +totalnumber + +currentnumber;
             currentnumber = "";
-
-            console.log(totalnumber);
+            writeSecondLine(totalnumber);
+            writeFirstLine("")
             break;
         case "-":
             totalnumber = +totalnumber - +currentnumber;
             currentnumber = "";
-
-            console.log(totalnumber);
+            writeSecondLine(totalnumber);
+            writeFirstLine("")
             break;
         case "*":
             totalnumber = +totalnumber * +currentnumber;
             currentnumber = "";
-
-            console.log(totalnumber);
+            writeSecondLine(totalnumber);
+            writeFirstLine("")
             break;
         case "/":
             totalnumber = +totalnumber / +currentnumber;
             currentnumber = "";
-
-            console.log(totalnumber);
+            writeSecondLine(totalnumber);
+            writeFirstLine("")
             break;
     }
 }
@@ -103,11 +103,21 @@ function calculate(){
 function clearAll(){
     currentnumber = ""
     totalnumber = ""
-
-    console.log("cleared");
+    writeFirstLine("");
+    writeSecondLine("");
 }
 
 function deleteLast(){
     currentnumber = currentnumber.slice(0, currentnumber.length - 1);
-    console.log(currentnumber);
+    writeFirstLine(currentnumber);
+}
+
+function writeFirstLine(text){
+    let line = document.getElementById("firstline");
+    line.innerHTML = text;
+}
+
+function writeSecondLine(text){
+    let line = document.getElementById("secondline");
+    line.innerHTML = text;
 }

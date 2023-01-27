@@ -1,6 +1,7 @@
 let currentnumber = "";
 let totalnumber = "";
 let operator ="";
+let keypress = "";
 
 document.addEventListener("DOMContentLoaded", ()=>{
     let inputfields = document.getElementsByClassName("small-button");
@@ -12,29 +13,38 @@ document.addEventListener("DOMContentLoaded", ()=>{
     clearbutton.addEventListener("click", clearAll);
     backspace.addEventListener("click", deleteLast);
     equal.addEventListener("click", calculate);
+    document.addEventListener("keydown", (e) => {validateKey(e.key)})
 })
 
 function addInput() {
+
     if(currentnumber === "0"){
         currentnumber = "";
     }
 
-    if(Number.isInteger(+this.id)){
-    currentnumber += this.id
+    let input = undefined;
+
+    if(this.id == null) input = keypress;
+    else input = this.id;
+
+    if(Number.isInteger(+input)){
+    currentnumber += input;
     writeFirstLine(currentnumber);
     }
-    else if (this.id === "-" && currentnumber === "" && operator === "" && totalnumber === ""){
-        currentnumber = this.id;
+    else if (input === "-" && currentnumber === "" && operator === "" && totalnumber === ""){
+        currentnumber = input;
+        writeFirstLine(currentnumber);
     }
-    else if(this.id === "float"){
+    else if(input=== "float"){
         if(currentnumber.indexOf(".") === -1 && currentnumber === ""){
             currentnumber = "0" + ".";
         }
         else if (currentnumber !== "" && currentnumber.indexOf(".") < 0){
             currentnumber += ".";
         }
+        writeFirstLine(currentnumber);
     }
-    else if(this.id === "negate"){
+    else if(input === "negate"){
         if(+currentnumber > 0){
             currentnumber = "-" + currentnumber
         }
@@ -44,8 +54,11 @@ function addInput() {
 
         writeFirstLine(currentnumber);
     }
+    else if(input === "="){
+        calculate();
+    }
     else{
-        addOperator(this.id);
+        addOperator(input);
     }
    }
 
@@ -103,6 +116,7 @@ function calculate(){
 function clearAll(){
     currentnumber = ""
     totalnumber = ""
+    operator = "";
     writeFirstLine("");
     writeSecondLine("");
 }
@@ -110,6 +124,20 @@ function clearAll(){
 function deleteLast(){
     currentnumber = currentnumber.slice(0, currentnumber.length - 1);
     writeFirstLine(currentnumber);
+}
+
+function validateKey(input){
+    if(Number.isInteger(+input)){
+        keypress = input;
+        addInput();
+    }
+    else if(input === "*" || input === "/" || input === "+" || input === "-" || input === "="){
+        keypress = input;
+        addInput();
+    }
+    else{
+        console.log("Invalid input");
+    }
 }
 
 function writeFirstLine(text){

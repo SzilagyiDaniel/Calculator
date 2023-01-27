@@ -1,7 +1,6 @@
 let currentnumber = "";
 let totalnumber = "";
 let operator ="";
-let keypress = "";
 
 document.addEventListener("DOMContentLoaded", ()=>{
     let inputfields = document.getElementsByClassName("small-button");
@@ -16,7 +15,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     document.addEventListener("keydown", (e) => {validateKey(e.key)})
 })
 
-function addInput() {
+function addInput(...keypress) {
 
     if(currentnumber === "0"){
         currentnumber = "";
@@ -128,12 +127,10 @@ function deleteLast(){
 
 function validateKey(input){
     if(Number.isInteger(+input)){
-        keypress = input;
-        addInput();
+        addInput(input);
     }
     else if(input === "*" || input === "/" || input === "+" || input === "-" || input === "="){
-        keypress = input;
-        addInput();
+        addInput(input);
     }
     else{
         console.log("Invalid input");

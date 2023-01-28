@@ -1,29 +1,62 @@
+body{
+    background-color: black;
+    color: blue;
+}
 .container{
-    width: 600px;
-    height: 800px;
+    width: 400px;
+    height: 500px;
     margin: auto;
-    border: 1px solid black;
+    margin-top: 250px;
+    border: 1px solid blue;
     display: flex;
     flex-wrap: wrap;
+    background-color: rgb(10,10,10);
+    border-radius: 3px;
+}
+.small-button, .large-button{
+    border: 1px solid blue;
+    border-radius: 3px;
+    text-align: center;
 }
 .small-button{
-    width: 125px;
-    height: 80px;
-    border: 1px solid black;
+    width: 70px;
+    height: 40px;
     margin-right: 10px;
     margin-left: 10px;
+    padding: 4px;
+}
+.small-button:hover, .large-button:hover{
+    background-color: darkblue;
+    color: black;
 }
 .large-button{
-    width: 175px;
-    height: 80px;
-    border: 1px solid black;
+    width: 111px;
+    height: 40px;
     margin-right: 10px;
     margin-left: 10px;
 }
 #display{
-    width: 550px;
-    height: 100px;
-    border: 1px solid black;
+    width: 350px;
+    height: 80px;
+    border: 1px solid blue;
+    border-radius: 3px;
     margin: auto;
-
+    margin-bottom: 70px;
+}
+#firstline, #secondline{
+    display: grid;
+    height: 20px;
+    width: 320px;
+    margin-left: 15px;
+    text-align: right;
+}
+p{
+    margin-top: 10px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#backspace-font{
+    font-size: 20pt;
+    margin-top: 0px;
 }

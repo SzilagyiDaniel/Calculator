@@ -3,32 +3,28 @@ let totalnumber = "";
 let operator ="";
 
 document.addEventListener("DOMContentLoaded", ()=>{
-    let inputfields = document.getElementsByClassName("small-button");
-    let clearbutton = document.getElementById("clear");
-    let backspace = document.getElementById("backspace");
-    let equal = document.getElementById("=");
+    const inputbutton = document.getElementsByClassName("small-button");
+    const clearbutton = document.getElementById("clear");
+    const backspacebutton = document.getElementById("backspace");
+    const equalbutton = document.getElementById("=");
 
-    for(let i = 0 ; i < inputfields.length; i++) {inputfields[i].addEventListener("click", addInput)};
+    for(let i = 0 ; i < inputbutton.length; i++) {inputbutton[i].addEventListener("click", addInput)};
     clearbutton.addEventListener("click", clearAll);
-    backspace.addEventListener("click", deleteLast);
-    equal.addEventListener("click", calculate);
+    backspacebutton.addEventListener("click", deleteLast);
+    equalbutton.addEventListener("click", calculate);
     document.addEventListener("keydown", (e) => {validateKey(e.key)})
 })
 
 function addInput(...keypress) {
 
-    if(currentnumber === "0"){
-        currentnumber = "";
-    }
-
     let input = undefined;
 
-    if(this.id == null) input = keypress;
+    if(this.id == null) input = keypress[0];
     else input = this.id;
 
     if(Number.isInteger(+input)){
-    currentnumber += input;
-    writeFirstLine(currentnumber);
+        currentnumber += input;
+        writeFirstLine(currentnumber);
     }
     else if (input === "-" && currentnumber === "" && operator === "" && totalnumber === ""){
         currentnumber = input;
@@ -44,28 +40,16 @@ function addInput(...keypress) {
         writeFirstLine(currentnumber);
     }
     else if(input === "negate"){
-        if(+currentnumber > 0){
-            currentnumber = "-" + currentnumber
-        }
-        else if (+currentnumber < 0){
-            currentnumber = currentnumber.slice(1, currentnumber.length);
-        }
-
+        currentnumber = +currentnumber * -1;
         writeFirstLine(currentnumber);
     }
-    else if(input === "="){
-        calculate();
-    }
-    else{
-        addOperator(input);
-    }
+    else if(input === "=" || input === "Enter") calculate();
+    else addOperator(input);
    }
 
 function addOperator(id){
 
-    if (operator !== "" && currentnumber !== ""){
-        calculate();
-    }
+    if (operator !== "" && currentnumber !== "") calculate();
     else if (operator === "" && currentnumber !== ""){
         totalnumber = currentnumber;
         currentnumber = "";
@@ -76,36 +60,28 @@ function addOperator(id){
         operator = id;
         writeFirstLine(totalnumber + operator);
     }
-
 }
 
 function calculate(){
-    if(totalnumber === ""){
-        totalnumber = "0";
-    }
 
     switch(operator){
         case "+":
             totalnumber = +totalnumber + +currentnumber;
-            currentnumber = "";
             writeSecondLine(totalnumber);
             writeFirstLine("")
             break;
         case "-":
             totalnumber = +totalnumber - +currentnumber;
-            currentnumber = "";
             writeSecondLine(totalnumber);
             writeFirstLine("")
             break;
         case "*":
             totalnumber = +totalnumber * +currentnumber;
-            currentnumber = "";
             writeSecondLine(totalnumber);
             writeFirstLine("")
             break;
         case "/":
             totalnumber = +totalnumber / +currentnumber;
-            currentnumber = "";
             writeSecondLine(totalnumber);
             writeFirstLine("")
             break;
@@ -121,25 +97,23 @@ function clearAll(){
 }
 
 function deleteLast(){
-    currentnumber = currentnumber.slice(0, currentnumber.length - 1);
+    if (operator !== "" && currentnumber === ""){
+        operator = "";
+        currentnumber = totalnumber;
+        totalnumber = "";
+    }
+    else currentnumber = currentnumber.slice(0, currentnumber.length - 1);
     writeFirstLine(currentnumber);
 }
 
 function validateKey(input){
-    if(Number.isInteger(+input)){
-        addInput(input);
-    }
-    else if(input === "*" || input === "/" || input === "+" || input === "-" || input === "="){
-        addInput(input);
-    }
-    else{
-        console.log("Invalid input");
-    }
+    if(Number.isInteger(+input) || input === "*" || input === "/" || input === "+" || input === "-" || input === "=" || input === "Enter") addInput(input);
+    else if (input === "Backspace") deleteLast();
 }
 
 function writeFirstLine(text){
     let line = document.getElementById("firstline");
-    line.innerHTML = text;
+    line.innerHTML = totalnumber + " " + operator + " " + currentnumber;
 }
 
 function writeSecondLine(text){
